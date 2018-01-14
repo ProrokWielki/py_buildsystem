@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>BuildSystem</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.python.pydev.PyDevBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.python.pydev.pythonNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>BuildSystem.py</name>
+			<type>1</type>
+			<location>E:/Moje/Projects/BuildSystem/BuildSystem.py</location>
+		</link>
+		<link>
+			<name>jsonFiles</name>
+			<type>2</type>
+			<location>E:/Moje/Projects/BuildSystem/jsonFiles</location>
+		</link>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<location>E:/Moje/Projects/BuildSystem/lib</location>
+		</link>
+	</linkedResources>
+</projectDescription>
