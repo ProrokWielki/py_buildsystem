@@ -56,7 +56,6 @@ class FilesFinder:
                         if self.__list_of_paths_to_exlude_from_search is None or not any(__excluded_path in os.path.join(root, file).replace("\\", "/") for __excluded_path in self.__list_of_paths_to_exlude_from_search):
                             if __compiled_regex.match(file) is not None:              
                                 __found_files.append(os.path.join(root,file).replace("\\", "/"))
-
         else:
             for directory in self.__paths_to_search:
                 for file in os.listdir(directory):

@@ -7,7 +7,6 @@ import unittest
 from lib.FilesFinder.FilesFinder import FilesFinder
 from importlib._bootstrap_external import FileFinder
 
-
 script_file_path = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
 
 test_files_directory_name = "/test_files"
