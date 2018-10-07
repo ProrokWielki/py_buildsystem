@@ -16,19 +16,19 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>BuildSystem.py</name>
-			<type>1</type>
-			<location>E:/Moje/Projects/BuildSystem/BuildSystem.py</location>
-		</link>
-		<link>
-			<name>jsonFiles</name>
-			<type>2</type>
-			<location>E:/Moje/Projects/BuildSystem/jsonFiles</location>
-		</link>
-		<link>
 			<name>lib</name>
 			<type>2</type>
-			<location>E:/Moje/Projects/BuildSystem/lib</location>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/lib</locationURI>
+		</link>
+		<link>
+			<name>test</name>
+			<type>2</type>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/test</locationURI>
+		</link>
+		<link>
+			<name>lib/BuildSystem.py</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-2-PROJECT_LOC%7D/BuildSystem.py</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
