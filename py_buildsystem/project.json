@@ -1,0 +1,14 @@
+{    "defines": ["STM32L452xx"],
+
+  "flags": ["-g", 
+    		"-T ../../MCU/STM32L452RETx_FLASH.ld", 
+    		"-mcpu=cortex-m4", 
+    		"--specs=nosys.specs" ],
+    
+  "includes": ["../../LIB/CMSIS/Device/ST/STM32L4xx/Include",
+   			   "../../LIB/CMSIS/Include" ],
+
+  "project_name": "Wooden_Clock",
+  "sources_root_folder": "../../",
+  "output_folder": "../../Output"
+}
