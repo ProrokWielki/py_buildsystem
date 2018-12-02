@@ -73,13 +73,13 @@ class FilesFinder:
         if isinstance(extentions, str):
             if(extentions.startswith("*")):
                 extentions = extentions[1:]                                           # remove * from the begining
-            self.__file_name_search_regex = ".*" + extentions + "$"          
+            self.__file_name_search_regex = ".*" + extentions.replace(".", "\.") + "$"          
         else:
             self.__file_name_search_regex = ".*(" 
             for extention in extentions:
                 if(extention.startswith("*")):
                     extention = extention[1:]                                         # remove * from the begining
-                self.__file_name_search_regex += "(" + extention + ")|" 
+                self.__file_name_search_regex += "(" + extention.replace(".", "\.") + ")|" 
             
             self.__file_name_search_regex = self.__file_name_search_regex[:-1] + ")$" # remove last "|" and end the regex with ")$"
         

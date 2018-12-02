@@ -12,7 +12,7 @@ test_files_directory_name = "/test_files"
 
 test_files_path = script_file_path + test_files_directory_name
 
-test_files_names = ["test.c", "test.h", "test.o", "test_test.c", "test_test.h", "test_test.o", "test_c_test.c", "test_h_test.h", "test_o_test.o"]
+test_files_names = ["test.c", "test.h", "test.o", "test_test.c", "test_test.h", "test_test.o", "test_c_test.c", "test_h_test.h", "test_o_test.o", "testc" ]
 
 test_files_in_directories = [ "/tes1/test1.c", "/test1/test1.h", "/test1/test1.o", "/tes2/test2.c", "/test2/test2.h", "/test2/test2.o"]
 
@@ -92,8 +92,8 @@ class TestFileFinder(unittest.TestCase):
     #and this one    
     def test_search(self):       
         files_finder_path_only = FilesFinder(test_files_path)
-        files_finder_regex_test = FilesFinder(test_files_path, ".*.c$")
-        files_finder_regex_test2 = FilesFinder(test_files_path, ".*test_[c|o|h]_test.[c|h|o]")
+        files_finder_regex_test = FilesFinder(test_files_path, ".*\.c$")
+        files_finder_regex_test2 = FilesFinder(test_files_path, ".*test_[c|o|h]_test\.[c|h|o]")
         files_finder_exclude_dirs = FilesFinder(test_files_path, list_of_paths_to_exlude_from_search = [ "/test1/", "/test2/" ])
         files_finder_no_subdirs = FilesFinder(test_files_path, search_subdirectories= False)
                 
@@ -106,7 +106,7 @@ class TestFileFinder(unittest.TestCase):
     def test_set_files_extentions(self):
         files_finder = FilesFinder(test_files_path)
         
-        files_finder.set_files_extentions("c")
+        files_finder.set_files_extentions(".c")
         self.assertCountEqual(files_finder.search(), self.c_files)
         
         files_finder.set_files_extentions([ ".g", ".hpp" ])
