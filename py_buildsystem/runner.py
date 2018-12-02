@@ -40,19 +40,35 @@ step
 
 import argparse
 
-import Compiler.Compiler as Compiler
+from Compiler.Compiler import Compiler
+from FilesFinder.FilesFinder import FilesFinder
+from ProjectConfig.ProjectConfig import ProjectConfig
 
 parser = argparse.ArgumentParser(description='Python based build system.')
 
 parser.add_argument('compiler_config', metavar='CC', type=str, nargs=1,
                     help='Compiler configuration file')
 
+parser.add_argument('project_config', metavar='PC', type=str, nargs=1,
+                    help='Project configuration file')
+
 args = parser.parse_args()
 
 
-print(args.compiler_config[0])
 
-compiler = Compiler.Compiler(args.compiler_config[0])
+print(args.compiler_config[0])
+print(args.project_config[0])
+
+compiler = Compiler(args.compiler_config[0])
+project_config = ProjectConfig(args.project_config[0])
+
+files_finder = FilesFinder()
+
+files_finder.set_search_paths(project_config.get_sources_root_directory())
+files_finder.set_files_extentions([".c",".cpp"])
+files_finder.set_excluded_directiories("../../woodenClock/Software/LIB/FreeRTOS/")
+
+print(files_finder.search())
 
 print(compiler.get_compiler_path())
 
