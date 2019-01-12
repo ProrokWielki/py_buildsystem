@@ -1,48 +1,56 @@
-import os
-import sys
-import json
+import subprocess
 
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
 
-from ConfigReader.ConfigReader import ConfigReader 
+class Compiler():
+    def __init__(self, compiler_path, define_flag, output_flag,
+                 compile_flag, include_flag):
 
-class Compiler(ConfigReader):
+        self.__compiler_path = compiler_path
+        self.__define_flag = define_flag
+        self.__output_flag = output_flag
+        self.__compile_flag = compile_flag
+        self.__include_flag = include_flag
 
-    def get_compiler_path(self):
-        return self.__compiler_path 
-    
-    def _check_config(self):
-        try:
-            
-            self.__compiler_path = self.configuration["compiler_path"]            
-            self.__compiler_name = self.configuration["compiler_name"]            
-            self.__linker_name   = self.configuration["linker_name"]        
+        self.__flags = []
+        self.__defines = []
+        self.__includes = []
 
-            self.__define_flag  = self.configuration["define_flag"]
-            self.__output_flag  = self.configuration["output_flag"]
-            self.__compile_flag = self.configuration["compile_flag"]
-            self.__include_flag = self.configuration["include_flag"]            
-                   
-        except:
-            raise Exception('Given configuration file is incorrect.')
-                    
-        assert isinstance(self.__compiler_path, str), "'compiler_path' must be a string"
-        assert isinstance(self.__compiler_name, str), "'compiler_name' must be a string"
-        assert isinstance(self.__linker_name, str),   "'linker_name' must be a string"
+    def set_flags(self, list_of_flags):
+        self.__flags = list_of_flags
 
-        assert isinstance(self.__define_flag, str),  "'define_flag' must be a string"
-        assert isinstance(self.__output_flag , str), "'output_flag' must be a string"  
-        assert isinstance(self.__compile_flag, str), "'compile_flag' must be a string"         
-        assert isinstance(self.__include_flag, str), "'include_flag' must be a string" 
-    
-    def get_compiler_name(self):
-        return self.__compiler_name 
-    
-    def get_linker_name(self):
-        return self.__linker_name 
-    
-    def compile(self, list_of_files, project_cofiguration):
-        pass
-    
+    def set_defines(self, list_of_defines):
+        self.__defines = list_of_defines
 
-       
+    def set_includes(self, list_of_includes):
+        self.__includes = list_of_includes
+
+    def compile(self, list_of_files, output_directory,
+                list_of_additional_flags=[], list_of_additional_defines=[], list_of_additionals_includes=[]):
+
+        flags = self.__flags + list_of_additional_flags + [self.__compile_flag]
+        defines = self._compose_defines(self.__defines + list_of_additional_defines)
+        includes = self._compose_includes(self.__includes + list_of_additionals_includes)
+
+        for file in list_of_files:
+            output_file_name = file.split("/")[-1]  # take the file name
+            output_file_name = output_file_name.split(".")[0] + ".o"  # change expention to ".o"
+
+            output_flag = self.__output_flag + "/".join([output_directory, output_file_name])
+
+            subprocess.call(" ".join([self.__compiler_path] + flags + defines + includes + [output_flag] + [file]))
+
+    def _compose_defines(self, list_of_defines):
+        composed_defines = []
+
+        for define in list_of_defines:
+            composed_defines.append(self.__define_flag + define)
+
+        return composed_defines
+
+    def _compose_includes(self, list_of_includes):
+        composed_includes = []
+
+        for include in list_of_includes:
+            composed_includes.append(self.__include_flag + include)
+
+        return composed_includes
