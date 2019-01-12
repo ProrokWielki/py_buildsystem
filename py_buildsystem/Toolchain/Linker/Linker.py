@@ -18,8 +18,8 @@ class Linker:
 
         with open(filename, "w") as comand_line_file:
             for file in list_of_files:
-                comand_line_file.write(file + " ")
+                comand_line_file.write(" " + file)
 
-            subprocess.call(" ".join([self.__linker_path] + self.__flags + list_of_additional_flags + [self.__output_flag + " " + output_file] + [self.__command_line_file + filename]))
+        subprocess.call(" ".join([self.__linker_path] + self.__flags + list_of_additional_flags + [self.__command_line_file + filename] + [self.__output_flag + output_file] ))
 
         os.remove(filename)

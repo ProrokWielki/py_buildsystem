@@ -37,7 +37,7 @@ class Compiler():
 
             output_flag = self.__output_flag + "/".join([output_directory, output_file_name])
 
-            subprocess.call(" ".join([self.__compiler_path] + flags + defines + includes + [output_flag + file]))
+            subprocess.call(" ".join([self.__compiler_path] + flags + defines + includes + [output_flag] + [file]))
 
     def _compose_defines(self, list_of_defines):
         composed_defines = []

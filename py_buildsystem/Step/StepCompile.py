@@ -15,7 +15,7 @@ class StepCompile(Step):
 
         self.compiler = compiler
 
-        self.files_finder = FilesFinder(list_of_paths_to_search=self. __source_directories)
+        self.files_finder = FilesFinder(list_of_paths_to_search=self. __source_directories, search_subdirectories=self.__search_subdirectories)
         self.files_finder.set_files_extentions(self.__types)
 
     def perform(self):
@@ -38,6 +38,11 @@ class StepCompile(Step):
             self.__types = self.configuration["types"]
         except KeyError:
             raise Exception("No type given")
+
+        try:
+            self.__search_subdirectories = self.configuration["search_subdirectories"]
+        except KeyError:
+            self.__search_subdirectories = True
 
     def _find_files(self):
         self.__files_to_compile = self.files_finder.search()
