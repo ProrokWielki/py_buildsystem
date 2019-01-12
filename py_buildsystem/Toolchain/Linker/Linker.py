@@ -14,12 +14,14 @@ class Linker:
 
     def link(self, list_of_files, output_file, list_of_additional_flags=[]):
 
-        filename = str(time.time()) + "linker_file"
+        print(list_of_files)
+
+        filename = str(int(time.time())) + "linker_file"
 
         with open(filename, "w") as comand_line_file:
             for file in list_of_files:
                 comand_line_file.write(file + " ")
 
-                subprocess.call(" ".join([self.__linker_path] + self.__flags + list_of_additional_flags + [self.__output_flag + output_file] + [self.__command_line_file + filename]))
+            subprocess.call(" ".join([self.__linker_path] + self.__flags + list_of_additional_flags + [self.__output_flag + " " + output_file] + [self.__command_line_file + filename]))
 
         os.remove(filename)

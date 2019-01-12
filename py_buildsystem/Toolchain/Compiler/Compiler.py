@@ -27,6 +27,8 @@ class Compiler():
     def compile(self, list_of_files, output_directory,
                 list_of_additional_flags=[], list_of_additional_defines=[], list_of_additionals_includes=[]):
 
+        print(list_of_files)
+
         flags = self.__flags + list_of_additional_flags + [self.__compile_flag]
         defines = self._compose_defines(self.__defines + list_of_additional_defines)
         includes = self._compose_includes(self.__includes + list_of_additionals_includes)
@@ -37,7 +39,7 @@ class Compiler():
 
             output_flag = self.__output_flag + "/".join([output_directory, output_file_name])
 
-            subprocess.call(" ".join([self.__compiler_path] + flags + defines + includes + [output_flag] + [file]))
+            subprocess.call(" ".join([self.__compiler_path] + flags + defines + includes + [output_flag + file]))
 
     def _compose_defines(self, list_of_defines):
         composed_defines = []

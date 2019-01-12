@@ -1,7 +1,7 @@
 import argparse
 
-from Project.Project import Project
-from Toolchain.Toolchain import Toolchain
+from .Project.Project import Project
+from .Toolchain.Toolchain import Toolchain
 
 # sys.tracebacklimit = 0
 
