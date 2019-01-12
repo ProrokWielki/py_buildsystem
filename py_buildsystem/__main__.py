@@ -1,48 +1,10 @@
-"""
-process
-    -get list of headers                       --files finde
-    -get list of sources                       --files finde
-    -get list of object files                  --files finde
-    
-    -get old MD5 of header files               --file read
-    -get old MD5 of source files               --file read
-       
-    -calculate MD5 of header files             --list2dict
-    -calculate MD5 of source files             --list2dict
-    
-    -get list of changed headers               --dict_diff
-    -get list of changed sources               --dict_diff
-        
-    -get dependencies                          --file read   
-    -get dependencies based on changed sources --list2dict
-    -update dependecies                        --dict combine
-    
-    -get list of files needed to be recompiled due to change of headers --dict_diff
-    -get list of uncompiled files                                       --list_diff
-    
-    -combine lists  -- list combiner
-    
-"""
-
-"""
-pre_compilation
-    get all headers
-    get changed headers
-
-step
-
-"""
-
-"""
-    Find Files 
-    
-"""
-
 import argparse
 
-from Compiler.Compiler import Compiler
-from FilesFinder.FilesFinder import FilesFinder
-from ProjectConfig.ProjectConfig import ProjectConfig
+from Project.Project import Project
+from Toolchain.Toolchain import Toolchain
+
+# sys.tracebacklimit = 0
+
 
 parser = argparse.ArgumentParser(description='Python based build system.')
 
@@ -52,27 +14,10 @@ parser.add_argument('compiler_config', metavar='CC', type=str, nargs=1,
 parser.add_argument('project_config', metavar='PC', type=str, nargs=1,
                     help='Project configuration file')
 
+parser.add_argument('compiler_path', metavar='path', type=str, nargs='?', default='',
+                    help='Path to compiler')
+
 args = parser.parse_args()
 
-
-
-print(args.compiler_config[0])
-print(args.project_config[0])
-
-compiler = Compiler(args.compiler_config[0])
-project_config = ProjectConfig(args.project_config[0])
-
-files_finder = FilesFinder()
-
-files_finder.set_search_paths(project_config.get_sources_root_directory())
-files_finder.set_files_extentions([".c",".cpp"])
-files_finder.set_excluded_directiories("../../woodenClock/Software/LIB/FreeRTOS/")
-
-print(files_finder.search())
-
-print(compiler.get_compiler_path())
-
-
-
-
-    
+toolchain = Toolchain(args.compiler_config[0], args.compiler_path)
+project = Project(args.project_config[0], toolchain)
