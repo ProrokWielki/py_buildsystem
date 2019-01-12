@@ -14,8 +14,6 @@ class Linker:
 
     def link(self, list_of_files, output_file, list_of_additional_flags=[]):
 
-        print(list_of_files)
-
         filename = str(int(time.time())) + "linker_file"
 
         with open(filename, "w") as comand_line_file:

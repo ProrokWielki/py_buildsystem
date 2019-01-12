@@ -27,8 +27,6 @@ class Compiler():
     def compile(self, list_of_files, output_directory,
                 list_of_additional_flags=[], list_of_additional_defines=[], list_of_additionals_includes=[]):
 
-        print(list_of_files)
-
         flags = self.__flags + list_of_additional_flags + [self.__compile_flag]
         defines = self._compose_defines(self.__defines + list_of_additional_defines)
         includes = self._compose_includes(self.__includes + list_of_additionals_includes)
