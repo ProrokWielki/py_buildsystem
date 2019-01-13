@@ -1,8 +1,13 @@
 from setuptools import setup, find_packages
 
+with open('README.md') as f:
+    long_description = f.read()
+
 setup(name='py_buildsystem',
-      version='0.3',
-      description='pythin based build system.',
+      version='0.3.1',
+      description='python based build system.',
+	  long_description=long_description,
+	  long_description_content_type='text/markdown',  # This is important!
       url='https://github.com/ProrokWielki/py_buildsystem',
       author='Paweł Warzecha',
       author_email='pawel.warzecha@yahoo.com',
