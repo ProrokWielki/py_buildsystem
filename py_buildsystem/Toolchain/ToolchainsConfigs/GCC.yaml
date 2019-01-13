@@ -1,5 +1,5 @@
   compiler: gcc
-  linker:   ld
+  linker:   gcc
 
   define_flag:  -D
   output_flag:  -o
