@@ -5,5 +5,5 @@
   output_flag:  -o
   compile_flag: -c
   include_flag: -I
-  comand_line_file: "-Wl,@"
+  comand_line_file: "@"
   version_flag: --version

@@ -3,7 +3,7 @@ import argparse
 from .Project.Project import Project
 from .Toolchain.Toolchain import Toolchain
 
-# sys.tracebacklimit = 0
+sys.tracebacklimit = 0
 
 
 parser = argparse.ArgumentParser(description='Python based build system.')
