@@ -4,7 +4,7 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(name='py_buildsystem',
-      version='0.3.3',
+      version='0.3.4',
       description='python based build system.',
 	  long_description=long_description,
 	  long_description_content_type='text/markdown',  # This is important!
