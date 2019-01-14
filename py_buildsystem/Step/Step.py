@@ -1,6 +1,6 @@
 from abc import abstractmethod, ABCMeta
 
-from ConfigReader.ConfigReader import ConfigReader
+from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 
 
 class Step(ConfigReader):
@@ -9,3 +9,10 @@ class Step(ConfigReader):
     @abstractmethod
     def perform(self):
         pass  # pragma: no cover
+
+    @abstractmethod
+    def get_type(self):
+        pass  # pragma: no cover
+
+    def get_name(self):
+        return self.step_name

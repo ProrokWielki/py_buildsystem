@@ -1,19 +1,18 @@
 import os
-import sys
 
-from Step.Step import Step
+from py_buildsystem.common import logger
 
-from FilesFinder.FilesFinder import FilesFinder  # noqa: E402
-
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
+from py_buildsystem.Step.Step import Step
+from py_buildsystem.FilesFinder.FilesFinder import FilesFinder
 
 
 class StepLink(Step):
-    def __init__(self, step_config, linker):
+    def __init__(self, step_config, step_name, linker):
         self.configuration = step_config
         self._check_config()
 
         self.linker = linker
+        self.step_name = step_name
 
         self.files_finder = FilesFinder(list_of_paths_to_search=self. __source_directories)
         self.files_finder.set_files_extentions(self.__types)
@@ -34,9 +33,13 @@ class StepLink(Step):
         except KeyError:
             raise Exception("No type given")
 
+    def get_type(self):
+        return "link"
+
     def perform(self):
         self._create_output_directory()
         self._find_files()
+
         self.linker.link(self.__files_to_compile, self.__output_file)
 
     def _find_files(self):

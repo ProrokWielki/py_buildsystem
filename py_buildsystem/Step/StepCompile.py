@@ -1,19 +1,18 @@
 import os
-import sys
 
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
+from py_buildsystem.common import logger
 
-from Step.Step import Step  # noqa: E402
-
-from FilesFinder.FilesFinder import FilesFinder  # noqa: E402
+from py_buildsystem.Step.Step import Step
+from py_buildsystem.FilesFinder.FilesFinder import FilesFinder
 
 
 class StepCompile(Step):
-    def __init__(self, step_config, compiler):
+    def __init__(self, step_config, step_name, compiler):
         self.configuration = step_config
         self._check_config()
 
         self.compiler = compiler
+        self.step_name = step_name
 
         self.files_finder = FilesFinder(list_of_paths_to_search=self. __source_directories, search_subdirectories=self.__search_subdirectories)
         self.files_finder.set_files_extentions(self.__types)
@@ -21,7 +20,11 @@ class StepCompile(Step):
     def perform(self):
         self._create_outpu_directory()
         self._find_files()
+
         self.compiler.compile(self.__files_to_compile, self.__output_directory)
+
+    def get_type(self):
+        return "compile"
 
     def _check_config(self):
         try:
@@ -48,4 +51,5 @@ class StepCompile(Step):
         self.__files_to_compile = self.files_finder.search()
 
     def _create_outpu_directory(self):
+        logger.debug("Creating " + self.__output_directory)
         os.makedirs(self.__output_directory, exist_ok=True)

@@ -26,7 +26,20 @@ python setup.py install
 To run the package use this command:
 
 ```
-python -m py_buildsystem <project specific toolchain config> <project config> [path to the toolchain]
+py_buildsystem [-h] [-v] -pcc -pc [compiler path]
+```
+
+Options:
+
+```
+positional arguments:
+  -pcc           Project specific toolchain configuration file
+  -pc            Project configuration file
+  compiler path  Path to compiler
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -v, --verbose  verbose mode
 ```
 
 To use this buildsystem you have to provide two *yaml* files:

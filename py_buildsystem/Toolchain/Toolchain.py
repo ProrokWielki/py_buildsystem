@@ -1,15 +1,10 @@
 import os
-import sys
 import yaml
 import subprocess
 
-from .Linker.Linker import Linker
-from .Compiler.Compiler import Compiler
-
-from ConfigReader.ConfigReader import ConfigReader
-
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
-
+from py_buildsystem.Toolchain.Linker.Linker import Linker
+from py_buildsystem.Toolchain.Compiler.Compiler import Compiler
+from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 
 path_to_configs = os.path.dirname(__file__).replace("\\", "/") + "/ToolchainsConfigs"
 

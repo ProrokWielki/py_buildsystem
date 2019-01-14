@@ -1,5 +1,7 @@
 import subprocess
 
+from py_buildsystem.common import logger
+
 
 class Compiler():
     def __init__(self, compiler_path, define_flag, output_flag,
@@ -24,8 +26,8 @@ class Compiler():
     def set_includes(self, list_of_includes):
         self.__includes = list_of_includes
 
-    def compile(self, list_of_files, output_directory,
-                list_of_additional_flags=[], list_of_additional_defines=[], list_of_additionals_includes=[]):
+    def compile(self, list_of_files, output_directory, list_of_additional_flags=[],
+                list_of_additional_defines=[], list_of_additionals_includes=[]):
 
         flags = self.__flags + list_of_additional_flags + [self.__compile_flag]
         defines = self._compose_defines(self.__defines + list_of_additional_defines)
@@ -37,6 +39,7 @@ class Compiler():
 
             output_flag = self.__output_flag + "/".join([output_directory, output_file_name])
 
+            logger.info("Compiling: " + file)
             subprocess.call(" ".join([self.__compiler_path] + flags + defines + includes + [output_flag] + [file]))
 
     def _compose_defines(self, list_of_defines):

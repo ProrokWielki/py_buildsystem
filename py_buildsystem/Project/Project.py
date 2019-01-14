@@ -1,11 +1,7 @@
-import os
-import sys
+from py_buildsystem.common import logger
 
-sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '..'))
-
-from Step.StepFactory import StepFactory  # noqa: E402
-
-from ConfigReader.ConfigReader import ConfigReader  # noqa: E402
+from py_buildsystem.Step.StepFactory import StepFactory
+from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 
 
 class Project(ConfigReader):
@@ -55,5 +51,9 @@ class Project(ConfigReader):
             self.__steps.append(StepFactory.create(step, object_to_inject=self.__toolchain))
 
     def run(self):
+        logger.info("Starting " + self.__project_name + " project")
+
         for step in self.__steps:
+            logger.info("Performing " + step.get_type() + " " + step.get_name())
             step.perform()
+            logger.info("Finished " + step.get_type() + " " + step.get_name())
