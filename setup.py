@@ -4,12 +4,12 @@ with open('README.md') as f:
     long_description = f.read()
 
 setup(name='py_buildsystem',
-      version='0.4.1',
+      version='0.4.2',
       description='python based build system.',
 	  long_description=long_description,
 	  long_description_content_type='text/markdown',  # This is important!
       url='https://github.com/ProrokWielki/py_buildsystem',
-      author='Paweł Warzecha',
+      author='Pawel Warzecha',
       author_email='pawel.warzecha@yahoo.com',
       license='MIT',
       packages=find_packages(),

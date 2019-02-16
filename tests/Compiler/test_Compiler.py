@@ -87,8 +87,6 @@ class TestCompiler(unittest.TestCase):
         self.assertEqual(self.num_of_calls, len(files_to_compile[2:]))
 
     def subprocess_call_mock_single_file(self, command):
-        command = command.split(" ")
-
         self.assertCountEqual(command, self.expected_command)
 
     def subprocess_call_mock_increment_num_of_calls(self, command):
