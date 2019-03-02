@@ -1,5 +1,5 @@
-  compiler: arm-none-eabi-gcc
-  linker:   arm-none-eabi-gcc
+  compiler: arm-none-eabi-g++
+  linker:   arm-none-eabi-g++
 
   define_flag:  -D
   output_flag:  -o
