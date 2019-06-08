@@ -1,6 +1,7 @@
+from py_buildsystem.Step.StepCommand import StepCommand
 from py_buildsystem.Step.StepCompile import StepCompile
 from py_buildsystem.Step.StepLink import StepLink
-
+from py_buildsystem.Step.StepGit import StepGit
 
 class StepFactory:
     @staticmethod
@@ -14,5 +15,9 @@ class StepFactory:
             return StepCompile(step_config, step_name, object_to_inject.get_compiler())
         elif 'link' in step_type:
             return StepLink(step_config, step_name, object_to_inject.get_linker())
+        elif 'git' in step_type:
+            return StepGit(step_config, step_name)
+        elif 'command' in step_type:
+            return StepCommand(step_config, step_name)
         else:
             raise TypeError('Unsuported step type')
