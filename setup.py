@@ -16,6 +16,7 @@ setup(name='py_buildsystem',
       include_package_data=True,
       install_requires=[
           'pyyaml',
-          'setuptools-git'
+          'setuptools-git',
+          'gitpython'
           ],
       zip_safe=False)
