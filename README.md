@@ -27,7 +27,6 @@ To run the package use this command:
 
 ```
 usage: py_buildsystem [-h] [-v] -pcc PROJECT_COMPILER_CONFIG -pc PROJECT_CONFIG [compiler path]
-py_buildsystem [-h] [-v] -pcc -pc [compiler path]
 ```
 
 Options:
@@ -50,7 +49,7 @@ To use this buildsystem you have to provide two *yaml* files:
 * project configuration, 
 * project specific toolchain configuration.
 
-If your toolchain is not in the *PATH* you have to provide its path to the buildystem.
+If your toolchain is not in the *PATH* you have to provide its path to the toolchain
 
 
 ### Project configuration
@@ -138,8 +137,10 @@ linker_flags:
 Every toolchain has to have its configuration file. The file contains basic inforamtion about the toolchain, executables names and defines basic flags used by the toolchain. 
 
 Currently supported toolchains:
-* arm-none-eabi -- GCC_ARM,
+* arm-none-eabi-gcc -- GCC_ARM,
+* arm-none-eabi-g++ -- G++_ARM,
 * gcc -- GCC.
+
 
 If the toolchain you wish to use is not supported you can add the configuration file to the project.
 
