@@ -33,6 +33,11 @@ class StepLink(Step):
         except KeyError:
             raise Exception("No type given")
 
+        try:
+            self.__additional_flags = self.configuration["additional_flags"]
+        except KeyError:
+            self.__additional_flags = []
+
     def get_type(self):
         return "link"
 
@@ -40,7 +45,7 @@ class StepLink(Step):
         self._create_output_directory()
         self._find_files()
 
-        self.linker.link(self.__files_to_compile, self.__output_file)
+        self.linker.link(self.__files_to_compile, self.__output_file, self.__additional_flags)
 
     def _find_files(self):
         self.__files_to_compile = self.files_finder.search()

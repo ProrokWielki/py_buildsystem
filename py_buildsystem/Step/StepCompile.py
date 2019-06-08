@@ -7,6 +7,7 @@ from py_buildsystem.FilesFinder.FilesFinder import FilesFinder
 
 
 class StepCompile(Step):
+
     def __init__(self, step_config, step_name, compiler):
         self.configuration = step_config
         self._check_config()
@@ -21,7 +22,7 @@ class StepCompile(Step):
         self._create_outpu_directory()
         self._find_files()
 
-        self.compiler.compile(self.__files_to_compile, self.__output_directory)
+        self.compiler.compile(self.__files_to_compile, self.__output_directory, self.__additional_flags)
 
     def get_type(self):
         return "compile"
@@ -41,6 +42,11 @@ class StepCompile(Step):
             self.__types = self.configuration["types"]
         except KeyError:
             raise Exception("No type given")
+
+        try:
+            self.__additional_flags = self.configuration["additional_flags"]
+        except KeyError:
+            self.__additional_flags = []
 
         try:
             self.__search_subdirectories = self.configuration["search_subdirectories"]
