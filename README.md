@@ -60,7 +60,9 @@ This file contains definitions of the steps to be peformed, compiler definitions
 Available steps:
 
 * compile,
-* link. 
+* link,
+* git,
+* command. 
 
 Project configuration file example:
 
@@ -98,10 +100,11 @@ steps:
 
 Options available:
 
-* source directories -- list of directiories in which the files to compile are located,
-* output directory -- directory to which the output files will be writen,
+* source directories -- list of directories in which the files to compile are located,
+* output directory -- directory to which the output files will be written,
 * types -- file types to be compiled,
 * search_subdirectories -- defines if the sub directories are searched (optional -- default = False).
+* additional_flags -- list of additional flags for this step (optional)
 
 #### Step link
 
@@ -110,6 +113,22 @@ Options available:
 * source_directories -- list of directories where object files are located,
 * output_file -- executable file which will be created after linking,
 * types -- file types to be linked.
+* additional_flags -- list of additional flags for this step (optional)
+
+#### Step git
+
+Options available:
+
+* repo_location -- location of the repository
+* destination -- repository clone destination
+* branch --  branch to clone (optional -- default = master)
+
+#### Step command
+
+Options available:
+
+* location -- location from where to perform commands
+* commands -- list of commands to call
 
 ### Project specific toolchain configuration
 
@@ -140,7 +159,7 @@ Currently supported toolchains:
 * arm-none-eabi-gcc -- GCC_ARM,
 * arm-none-eabi-g++ -- G++_ARM,
 * gcc -- GCC.
-
+* g++ -- G++
 
 If the toolchain you wish to use is not supported you can add the configuration file to the project.
 
