@@ -6,6 +6,7 @@ from py_buildsystem.common import logger
 
 
 class Linker:
+
     def __init__(self, linker_path, output_flag, command_line_file):
         self.__linker_path = linker_path
         self.__output_flag = output_flag

@@ -4,6 +4,7 @@ from py_buildsystem.common import logger
 
 
 class Compiler():
+
     def __init__(self, compiler_path, define_flag, output_flag,
                  compile_flag, include_flag):
 
