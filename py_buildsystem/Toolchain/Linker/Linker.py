@@ -10,6 +10,7 @@ class Linker:
         self.__linker_path = linker_path
         self.__output_flag = output_flag
         self.__command_line_file = command_line_file
+        self.__flags = []
 
     def set_flags(self, list_of_flags):
         self.__flags = list_of_flags

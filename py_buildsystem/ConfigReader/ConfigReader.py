@@ -4,6 +4,7 @@ from abc import ABC, abstractmethod
 
 
 class ConfigReader(ABC):
+
     def __init__(self, config_yaml_file):
         self.read_config_file(config_yaml_file)
 

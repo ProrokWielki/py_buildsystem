@@ -5,7 +5,6 @@ import unittest
 
 from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 
-
 script_file_path = os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")
 test_files_directory_name = "test_files"
 corrupted_test_file_name = "corrupted_test_file.yaml"
@@ -15,7 +14,6 @@ test_files_path = script_file_path + "/" + test_files_directory_name
 
 test_file_with_path = test_files_path + "/" + test_file_name
 corrupted_test_file_with_path = test_files_path + "/" + corrupted_test_file_name
-
 
 test_data = {
     "string_field": "test_string",
@@ -28,6 +26,7 @@ test_data = {
 
 
 class MockConfigReader(ConfigReader):
+
     def _check_config(self):
         self.__string_field = self.configuration["string_field"]
 
@@ -44,6 +43,7 @@ class MockConfigReader(ConfigReader):
 
 
 class TestConfigReader(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         os.makedirs(test_files_path, exist_ok=True)

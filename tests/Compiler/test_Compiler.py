@@ -31,6 +31,7 @@ output_files = [file.replace(".c", ".o") for file in files_to_compile]
 
 
 class TestCompiler(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         os.makedirs(test_compiler_path, exist_ok=True)

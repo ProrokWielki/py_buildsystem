@@ -19,7 +19,6 @@ test_files_path = os.path.join(script_file_path, test_files_dir_name).replace("\
 test_config_file_with_path = os.path.join(test_files_path, test_config_file_name).replace("\\", "/")
 test_config_file_no_includes_no_defines_with_path = os.path.join(test_files_path, minimal_test_config_file_name).replace("\\", "/")
 
-
 project_test_configuration = {
     "defines": ["DEBUG"],
 
@@ -48,6 +47,7 @@ empty_project_config = {}
 
 
 class TestProjectConfig(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         os.makedirs(test_files_path, exist_ok=True)

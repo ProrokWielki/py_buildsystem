@@ -14,8 +14,6 @@ class StepGit(Step):
         self.step_name = step_name
 
     def _check_config(self):
-
-        print(self.configuration)
         try:
             self.__repository_location = self.configuration["repo_location"]
         except KeyError:

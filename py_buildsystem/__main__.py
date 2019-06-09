@@ -7,9 +7,7 @@ from py_buildsystem.common import logger, levels
 from py_buildsystem.Project.Project import Project
 from py_buildsystem.Toolchain.Toolchain import Toolchain
 
-
 sys.tracebacklimit = 0
-
 
 parser = argparse.ArgumentParser(prog="py_buildsystem", description='Python based build system.', allow_abbrev=True)
 

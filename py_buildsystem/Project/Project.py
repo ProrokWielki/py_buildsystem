@@ -5,6 +5,7 @@ from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 
 
 class Project(ConfigReader):
+
     def __init__(self, project_config_file, toolchain):
         ConfigReader.__init__(self, project_config_file)
 

@@ -7,6 +7,7 @@ from py_buildsystem.FilesFinder.FilesFinder import FilesFinder
 
 
 class StepLink(Step):
+
     def __init__(self, step_config, step_name, linker):
         self.configuration = step_config
         self._check_config()

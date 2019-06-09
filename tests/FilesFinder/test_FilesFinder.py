@@ -19,6 +19,7 @@ test_files_in_directories = ["/tes1/test1.c", "/test1/test1.h", "/test1/test1.o"
 
 
 class TestFileFinder(unittest.TestCase):
+
     @classmethod
     def setUpClass(cls):
         os.makedirs(test_files_path, exist_ok=True)

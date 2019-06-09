@@ -3,7 +3,9 @@ from py_buildsystem.Step.StepCompile import StepCompile
 from py_buildsystem.Step.StepLink import StepLink
 from py_buildsystem.Step.StepGit import StepGit
 
+
 class StepFactory:
+
     @staticmethod
     def create(step_config, object_to_inject=None):
         step_identifier = list(step_config.keys())[0].split(" ")

@@ -10,6 +10,7 @@ path_to_configs = os.path.dirname(__file__).replace("\\", "/") + "/ToolchainsCon
 
 
 class Toolchain(ConfigReader):
+
     def __init__(self, config_yaml_file, path_to_toolchain=""):
 
         ConfigReader.__init__(self, config_yaml_file)
