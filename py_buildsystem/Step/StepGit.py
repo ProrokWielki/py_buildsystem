@@ -13,6 +13,8 @@ class StepGit(Step):
 
         self.step_name = step_name
 
+        self.exit_code = 0
+
     def _check_config(self):
         try:
             self.__repository_location = self.configuration["repo_location"]
