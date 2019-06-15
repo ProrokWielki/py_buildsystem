@@ -29,6 +29,7 @@ class Compiler():
 
     def compile(self, list_of_files, output_directory, list_of_additional_flags=[],
                 list_of_additional_defines=[], list_of_additionals_includes=[]):
+        exit_code = 0
 
         flags = self.__flags + list_of_additional_flags + [self.__compile_flag]
         defines = self._compose_defines(self.__defines + list_of_additional_defines)
@@ -42,7 +43,11 @@ class Compiler():
 
             logger.debug("Compiling: " + file)
             command = [self.__compiler_path] + flags + defines + includes + [output_flag] + [file]
-            return subprocess.call(command)
+            exit_code += subprocess.call(command)
+
+        if(exit_code != 0):
+            return -1
+        return 0
 
     def _compose_defines(self, list_of_defines):
         composed_defines = []
