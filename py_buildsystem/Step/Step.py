@@ -16,3 +16,6 @@ class Step(ConfigReader):
 
     def get_name(self):
         return self.step_name
+
+    def get_exit_code(self):
+        return self.exit_code

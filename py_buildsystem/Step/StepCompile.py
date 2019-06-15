@@ -22,7 +22,7 @@ class StepCompile(Step):
         self._create_outpu_directory()
         self._find_files()
 
-        self.compiler.compile(self.__files_to_compile, self.__output_directory, self.__additional_flags)
+        self.exit_code = self.compiler.compile(self.__files_to_compile, self.__output_directory, self.__additional_flags)
 
     def get_type(self):
         return "compile"
@@ -31,26 +31,31 @@ class StepCompile(Step):
         try:
             self.__source_directories = self.configuration["source_directories"]
         except KeyError:
-            raise Exception("No source directories given")
+            logger.error("No source directories given")
+            exit(-1)
 
         try:
             self.__output_directory = self.configuration["output_direcotry"]
         except KeyError:
-            raise Exception("No output directory given")
+            logger.error("No output directory given")
+            exit(-1)
 
         try:
             self.__types = self.configuration["types"]
         except KeyError:
-            raise Exception("No type given")
+            logger.error("No type given")
+            exit(-1)
 
         try:
             self.__additional_flags = self.configuration["additional_flags"]
         except KeyError:
+            #  logger.debug("No additional flags provided")
             self.__additional_flags = []
 
         try:
             self.__search_subdirectories = self.configuration["search_subdirectories"]
         except KeyError:
+            # logger.debug("Setting default search_subdirectories -- true")
             self.__search_subdirectories = True
 
     def _find_files(self):

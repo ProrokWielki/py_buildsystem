@@ -2,6 +2,8 @@ import os
 import yaml
 import subprocess
 
+from py_buildsystem.common import logger
+
 from py_buildsystem.Toolchain.Linker.Linker import Linker
 from py_buildsystem.Toolchain.Compiler.Compiler import Compiler
 from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
@@ -13,6 +15,7 @@ class Toolchain(ConfigReader):
 
     def __init__(self, config_yaml_file, path_to_toolchain=""):
 
+        logger.debug("Reading toolchain configuration file.")
         ConfigReader.__init__(self, config_yaml_file)
 
         self._check_compiler_config_file()
@@ -40,16 +43,19 @@ class Toolchain(ConfigReader):
         try:
             self.__choosen_compiler = self.configuration["compiler"]
         except KeyError:
-            raise Exception("You must provide compiler name in a compiler configuration file")
+            logger.error("You must provide compiler name in a compiler configuration file")
+            exit(-1)
 
         try:
             self.__compiler_flags = self.configuration["compiler_flags"]
         except KeyError:
+            logger.warning("no compiler_flags_set")
             self.__compiler_flags = []
 
         try:
             self.__linker_flags = self.configuration["linker_flags"]
         except KeyError:
+            logger.warning("no linker_flags")
             self.__linker_flags = []
 
     def _check_compiler_config_file(self):
@@ -58,7 +64,8 @@ class Toolchain(ConfigReader):
                 compiler_config = yaml.load(compiler_config_file)
 
         except FileNotFoundError:
-            raise Exception("Configuration file for the compiler was not found.")
+            logger.error("Configuration file for the compiler was not found.")
+            exit(-1)
 
         self.__compiler_name = compiler_config["compiler"]
         self.__linker_name = compiler_config["linker"]
@@ -75,4 +82,5 @@ class Toolchain(ConfigReader):
             subprocess.check_output([self.__linker_path, self.__version_flag])
             subprocess.check_output([self.__compiler_path, self.__version_flag])
         except FileNotFoundError:
-            raise Exception("Can not find the compilers executable, check if the compilers path is correct or if the compiler is in a PATH.")
+            logger.error("Can not find the compilers executable, check if the compilers path is correct or if the compiler is in a PATH.")
+            exit(-1)

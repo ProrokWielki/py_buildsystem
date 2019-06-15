@@ -27,9 +27,11 @@ class Linker:
                 comand_line_file.write(" " + file)
                 logger.debug("Added " + file)
 
-        logger.info("Linking...")
+        logger.debug("Linking {}".format(list_of_files))
         command = [self.__linker_path] + self.__flags + [self.__command_line_file + filename] + [self.__output_flag + output_file] + list_of_additional_flags
-        subprocess.call(command)
+        exit_code = subprocess.call(command)
 
         os.remove(filename)
         logger.debug("Removed " + filename)
+
+        return exit_code

@@ -7,6 +7,7 @@ from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 class Project(ConfigReader):
 
     def __init__(self, project_config_file, toolchain):
+        logger.debug("Reading project configuration file.")
         ConfigReader.__init__(self, project_config_file)
 
         self.__project_name = ((project_config_file.replace("\\", "/")).split("/")[-1]).split(".")[0]  # take the file name as a projecct name
@@ -24,16 +25,19 @@ class Project(ConfigReader):
         try:
             self.__defines = self.configuration["defines"]
         except KeyError:
+            logger.debug("defines not set")
             self.__defines = []
 
         try:
             self.__includes = self.configuration["includes"]
         except KeyError:
+            logger.debug("defines not set")
             self.__includes = []
 
         try:
             self.__steps_list = self.configuration["steps"]
         except KeyError:
+            logger.debug("steps not set")
             self.__steps_list = []
 
         self.__steps = []
@@ -58,3 +62,6 @@ class Project(ConfigReader):
             logger.info("Performing " + step.get_type() + " " + step.get_name())
             step.perform()
             logger.info("Finished " + step.get_type() + " " + step.get_name())
+
+    def get_exit_codes(self):
+        return [step.get_exit_code() for step in self.__steps]

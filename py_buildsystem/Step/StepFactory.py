@@ -1,3 +1,6 @@
+from py_buildsystem.common import logger
+
+
 from py_buildsystem.Step.StepCommand import StepCommand
 from py_buildsystem.Step.StepCompile import StepCompile
 from py_buildsystem.Step.StepLink import StepLink
@@ -22,4 +25,5 @@ class StepFactory:
         elif 'command' in step_type:
             return StepCommand(step_config, step_name)
         else:
-            raise TypeError('Unsuported step type')
+            logger.error('Unsuported step type')
+            exit(-1)

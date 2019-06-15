@@ -1,16 +1,17 @@
 import logging
 
 FORMAT = '[%(levelname)s]: %(message)s'
+MAX_LOG_LEVEL = 3
 
 logging.basicConfig(format=FORMAT)
 
 logger = logging.getLogger('root')
 
 levels = {
-    "CRITICAL": 50,
-    "ERROR": 40,
-    "WARNING": 30,
-    "INFO": 20,
-    "DEBUG": 10,
-    "NOTSET": 0,
+    0: 40,
+    1: 30,
+    2: 20,
+    3: 10,
 }
+
+

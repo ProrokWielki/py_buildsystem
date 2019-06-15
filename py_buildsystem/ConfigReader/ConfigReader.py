@@ -2,6 +2,8 @@ import yaml
 
 from abc import ABC, abstractmethod
 
+from py_buildsystem.common import logger
+
 
 class ConfigReader(ABC):
 
@@ -15,7 +17,8 @@ class ConfigReader(ABC):
             with open(config_yaml_file, 'r') as config_file:
                 self.configuration = yaml.load(config_file)
         except FileNotFoundError:
-            raise Exception('Given configuration file does not exist.')
+            logger.error('Given configuration file does not exist.')
+            exit(-1)
 
     @abstractmethod
     def _check_config(self):

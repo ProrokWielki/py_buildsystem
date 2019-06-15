@@ -17,16 +17,19 @@ class StepGit(Step):
         try:
             self.__repository_location = self.configuration["repo_location"]
         except KeyError:
-            raise Exception("No repository location given")
+            logger.error("No repository location given")
+            exit(-1)
 
         try:
             self.__clone_destination = self.configuration["destination"]
         except KeyError:
-            raise Exception("No clone destination given")
+            logger.error("No clone destination given")
+            exit(-1)
 
         try:
             self.__branch = self.configuration["branch"]
         except KeyError:
+            logger.debug("Pulling master branch")
             self.__branch = "master"
 
     def get_type(self):

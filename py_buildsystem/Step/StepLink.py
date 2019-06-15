@@ -22,21 +22,25 @@ class StepLink(Step):
         try:
             self.__source_directories = self.configuration["source_directories"]
         except KeyError:
-            raise Exception("No source directories given")
+            logger.error("No source directories given")
+            exit(-1)
 
         try:
             self.__output_file = self.configuration["output_file"]
         except KeyError:
-            raise Exception("No output directory given")
+            logger.error("No output directory given")
+            exit(-1)
 
         try:
             self.__types = self.configuration["types"]
         except KeyError:
-            raise Exception("No type given")
+            logger.error("No type given")
+            exit(-1)
 
         try:
             self.__additional_flags = self.configuration["additional_flags"]
         except KeyError:
+            logger.debug("additional_flags not set.")
             self.__additional_flags = []
 
     def get_type(self):
@@ -46,7 +50,7 @@ class StepLink(Step):
         self._create_output_directory()
         self._find_files()
 
-        self.linker.link(self.__files_to_compile, self.__output_file, self.__additional_flags)
+        self.exit_code = self.linker.link(self.__files_to_compile, self.__output_file, self.__additional_flags)
 
     def _find_files(self):
         self.__files_to_compile = self.files_finder.search()
