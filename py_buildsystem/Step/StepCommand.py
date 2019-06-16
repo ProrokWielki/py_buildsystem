@@ -35,13 +35,18 @@ class StepCommand(Step):
         logger.debug("Changing directory to " + self.__command_execution_location)
         os.chdir(self.__command_execution_location)
 
+        exit_code = 0
+
         for command in self.__commands:
             logger.debug("Calling " + command)
             if command.startswith("cd "):  # TODO: To be done better.
                 os.chdir(command.replace("cd ", ""))
             else:
-                self.return_code = subprocess.call(command, shell=True)
+                exit_code += subprocess.call(command, shell=True)
 
         logger.debug("Changing directory to " + base_location)
         os.chdir(base_location)
 
+        if exit_code:
+            self.exit_code = -1
+        self.exit_code = 0
