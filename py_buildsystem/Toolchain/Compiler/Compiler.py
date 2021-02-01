@@ -43,11 +43,10 @@ class Compiler():
 
             logger.debug("Compiling: " + file)
             command = [self.__compiler_path] + flags + defines + includes + [output_flag] + [file]
-            exit_code += subprocess.call(command)
+            exit_code = subprocess.call(command)
 
-        if(exit_code != 0):
-            return -1
-        return 0
+            if(exit_code != 0):
+                raise ChildProcessError(f"Compilation of {file} failed with exit code: {exit_code}")
 
     def _compose_defines(self, list_of_defines):
         composed_defines = []
