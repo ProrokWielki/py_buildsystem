@@ -1,3 +1,5 @@
+import os
+
 from py_buildsystem.common import logger
 
 from py_buildsystem.Step.StepFactory import StepFactory
@@ -9,6 +11,8 @@ class Project(ConfigReader):
     def __init__(self, project_config_file, toolchain):
         logger.debug("Reading project configuration file.")
         ConfigReader.__init__(self, project_config_file)
+
+        os.chdir(os.path.dirname(os.path.abspath(project_config_file)))
 
         self.__project_name = ((project_config_file.replace("\\", "/")).split("/")[-1]).split(".")[0]  # take the file name as a projecct name
 
@@ -39,6 +43,16 @@ class Project(ConfigReader):
         except KeyError:
             logger.debug("steps not set")
             self.__steps_list = []
+
+        try:
+            os.chdir(self.configuration["project_root"])
+        except KeyError:
+            logger.debug("project_root not set")
+
+
+
+
+
 
         self.__steps = []
 
