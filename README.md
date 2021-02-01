@@ -26,7 +26,7 @@ python setup.py install
 To run the package use this command:
 
 ```
-usage: py_buildsystem [-h] [-v] -pcc PROJECT_COMPILER_CONFIG -pc PROJECT_CONFIG [compiler path]
+usage: py_buildsystem vX.Y.Z [-h] [-v] -pcc PROJECT_COMPILER_CONFIG -pc PROJECT_CONFIG [compiler path]
 ```
 
 Options:
@@ -46,7 +46,7 @@ optional arguments:
 
 To use this buildsystem you have to provide two *yaml* files:
 
-* project configuration, 
+* project configuration,
 * project specific toolchain configuration.
 
 If your toolchain is not in the *PATH* you have to provide its path to the toolchain
@@ -62,7 +62,13 @@ Available steps:
 * compile,
 * link,
 * git,
-* command. 
+* command.
+
+Available key-words:
+
+* defines - list of defines to be passed to the compiler
+* includes - list of include paths to be passed to compiler
+* project_root - relative path to the project config file which will be treated as the root path to all the paths int config files (if empty - path of the project config file)
 
 Project configuration file example:
 
@@ -76,7 +82,7 @@ includes:
 
 steps:
   - compile MCU:
-    source_directories: 
+    source_directories:
       - ../../MCU
 
     output_direcotry: ../../Output/Obj/MCU
@@ -153,7 +159,7 @@ linker_flags:
 
 ### Toolchain configuration
 
-Every toolchain has to have its configuration file. The file contains basic inforamtion about the toolchain, executables names and defines basic flags used by the toolchain. 
+Every toolchain has to have its configuration file. The file contains basic inforamtion about the toolchain, executables names and defines basic flags used by the toolchain.
 
 Currently supported toolchains:
 * arm-none-eabi-gcc -- GCC_ARM,
@@ -176,4 +182,7 @@ include_flag: -I
 comand_line_file: "-Wl,@"
 version_flag: --version
 ```
+
+### Project using it
+[Wooden-Clock](https://github.com/ProrokWielki/Wooden-Clock)
 

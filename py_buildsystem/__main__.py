@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+import pkg_resources
 
 from py_buildsystem.common import logger, levels, MAX_LOG_LEVEL
 
@@ -9,7 +10,9 @@ from py_buildsystem.Toolchain.Toolchain import Toolchain
 
 sys.tracebacklimit = 0
 
-parser = argparse.ArgumentParser(prog="py_buildsystem", description='Python based build system.', allow_abbrev=True)
+version = pkg_resources.require('py_buildsystem')[0].version
+
+parser = argparse.ArgumentParser(prog=f"py_buildsystem v{version}", description='Python based build system.', allow_abbrev=True)
 
 parser.add_argument('-pcc', '--project_compiler_config', type=str, nargs=1, required=True,
                     help='Project specific toolchain configuration file')
