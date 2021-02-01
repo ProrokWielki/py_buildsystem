@@ -9,10 +9,11 @@ from py_buildsystem.ConfigReader.ConfigReader import ConfigReader
 class Project(ConfigReader):
 
     def __init__(self, project_config_file, toolchain):
-        logger.debug("Reading project configuration file.")
-        ConfigReader.__init__(self, project_config_file)
+        config_file_abs_path = os.path.abspath(project_config_file)
+        os.chdir(os.path.dirname(config_file_abs_path))
 
-        os.chdir(os.path.dirname(os.path.abspath(project_config_file)))
+        logger.debug("Reading project configuration file.")
+        ConfigReader.__init__(self, config_file_abs_path)
 
         self.__project_name = ((project_config_file.replace("\\", "/")).split("/")[-1]).split(".")[0]  # take the file name as a projecct name
 
@@ -45,14 +46,9 @@ class Project(ConfigReader):
             self.__steps_list = []
 
         try:
-            os.chdir(self.configuration["project_root"])
+            os.chdir(os.path.join(os.getcwd(),self.configuration["project_root"]))
         except KeyError:
             logger.debug("project_root not set")
-
-
-
-
-
 
         self.__steps = []
 
